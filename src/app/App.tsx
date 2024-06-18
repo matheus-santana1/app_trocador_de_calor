@@ -8,9 +8,11 @@ import StatusBar from "../components/StatusBar/statusbar.tsx";
 import Info from "../components/Info/info.tsx";
 import { useSystem, MensuaringMessage, ConnectMessage } from "../system/system.tsx";
 import useWebSocketDefault, { Options } from "react-use-websocket";
+import { useState } from "react";
 
 function App() {
   const { connected, url, setSendMessage, setSystem } = useSystem();
+  const [valueSlider, setValueSlider] = useState<number>(40);
 
   const socketOptions: Options = {
     onClose: () => {},
@@ -37,10 +39,10 @@ function App() {
       <Url />
       <Stack direction="row" spacing={3} marginTop={5}>
         <Select disable={!connected}></Select>
-        <Slider disable={!connected}></Slider>
+        <Slider disable={!connected} onChange={setValueSlider} valueSlider={valueSlider}></Slider>
       </Stack>
       <Chart disable={!connected}></Chart>
-      <Info disable={!connected} />
+      <Info disable={!connected} valueSlider={valueSlider} />
       <StatusBar></StatusBar>
     </>
   );

@@ -11,6 +11,7 @@ import gsap from "gsap";
 
 type InfoProps = {
   disable: boolean;
+  valueSlider: number;
 };
 
 function LinearProgressWithLabel(props: LinearProgressProps & { value: number }) {
@@ -38,15 +39,15 @@ export default function Info(props: InfoProps) {
   function PlayClick() {
     setSystem({ status: "mensuaring" });
     sendMessage({
-      rpm: rpm,
+      rpm: props.valueSlider,
       tempo: tempo,
     });
   }
 
-  function InfiteClick() {
+  function InfiniteClick() {
     setSystem({ status: "mensuaring" });
     sendMessage({
-      rpm: rpm,
+      rpm: props.valueSlider,
       tempo: tempo,
     });
   }
@@ -60,7 +61,7 @@ export default function Info(props: InfoProps) {
           <Button variant="contained" disabled={props.disable} onClick={PlayClick}>
             <PlayArrowIcon></PlayArrowIcon>
           </Button>
-          <Button variant="contained" disabled={props.disable} onClick={InfiteClick}>
+          <Button variant="contained" disabled={props.disable} onClick={InfiniteClick}>
             <AllInclusiveIcon></AllInclusiveIcon>
           </Button>
         </Stack>

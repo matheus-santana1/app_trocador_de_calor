@@ -2,12 +2,14 @@ import Box from "@mui/material/Box";
 import SliderMUI from "@mui/material/Slider";
 import { styled } from "@mui/material/styles";
 import "./slider.css";
-import { useSystem } from "../../system/system";
+import { SetStateAction, Dispatch } from "react";
 
 const iOSBoxShadow = "0 3px 1px rgba(0,0,0,0.1),0 4px 8px rgba(0,0,0,0.13),0 0 0 1px rgba(0,0,0,0.02)";
 
 type SliderProps = {
   disable: boolean;
+  onChange: Dispatch<SetStateAction<number>>;
+  valueSlider: number;
 };
 
 const IOSSlider = styled(SliderMUI)(({ theme }) => ({
@@ -58,18 +60,18 @@ const IOSSlider = styled(SliderMUI)(({ theme }) => ({
 }));
 
 export default function Slider(props: SliderProps) {
-  const { rpm, setRpm } = useSystem();
-
   return (
     <Box sx={{ width: "100%" }} className="SliderBox">
-      <p className="SliderValue">{rpm} rpm</p>
+      <p className="SliderValue">{props.valueSlider} rpm</p>
       <IOSSlider
         aria-label="slider"
         step={10}
         min={40}
         max={180}
-        value={rpm}
-        onChange={(_e, newValue) => setRpm(newValue as number)}
+        value={props.valueSlider}
+        onChange={(_e, newValue) => {
+          props.onChange(newValue as number);
+        }}
         disabled={props.disable}
       />
     </Box>
