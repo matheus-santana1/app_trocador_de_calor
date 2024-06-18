@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { SendMessage } from "react-use-websocket";
+import { SendJsonMessage } from "react-use-websocket/dist/lib/types";
 
 export type StatusActions = "connecting" | "connect" | "disconnect" | "mensuaring";
 
@@ -18,8 +18,12 @@ export type SystemState = {
   url: string | (() => string | Promise<string>) | null;
   connected: boolean;
   setSystem: (value: { status: StatusActions; url?: string | (() => string | Promise<string>) | null }) => void;
-  setSendMessage: (value: SendMessage) => void;
-  sendMessage: SendMessage;
+  setSendMessage: (value: SendJsonMessage) => void;
+  setRpm: (value: number | undefined) => void;
+  setTempo: (value: string | undefined) => void;
+  sendMessage: SendJsonMessage;
+  rpm: number | undefined;
+  tempo: string | undefined;
 };
 
 export const useSystem = create<SystemState>((set) => ({
@@ -41,5 +45,17 @@ export const useSystem = create<SystemState>((set) => ({
     set({
       sendMessage: value,
     }),
+  setRpm: (value) => {
+    set({
+      rpm: value,
+    });
+  },
+  setTempo: (value) => {
+    set({
+      tempo: value,
+    });
+  },
   sendMessage: () => {},
+  rpm: 40,
+  tempo: "3",
 }));

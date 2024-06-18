@@ -18,7 +18,7 @@ function App() {
       onMessageAction(JSON.parse(message.data));
     },
   };
-  const { sendMessage } = useWebSocketDefault(url, socketOptions);
+  const { sendJsonMessage } = useWebSocketDefault(url, socketOptions);
 
   function onMessageAction(data: ConnectMessage | MensuaringMessage) {
     if ("connect" in data) {
@@ -29,7 +29,7 @@ function App() {
   }
 
   useEffect(() => {
-    setSendMessage(sendMessage);
+    setSendMessage(sendJsonMessage);
   }, [url]);
 
   return (

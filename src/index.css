@@ -13,7 +13,7 @@ body {
 }
 
 #root {
-  margin: 30px 30px 60px 30px;
+  margin: 30px 30px 45px 30px;
   display: flex;
   flex-direction: column;
   height: 100%;

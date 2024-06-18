@@ -1,8 +1,8 @@
-import * as React from "react";
 import Box from "@mui/material/Box";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
+import { useSystem } from "../../system/system";
 import SelectMUI, { SelectChangeEvent } from "@mui/material/Select";
 
 type SelectProps = {
@@ -10,10 +10,10 @@ type SelectProps = {
 };
 
 export default function Select(props: SelectProps) {
-  const [age, setAge] = React.useState("");
+  const { setTempo } = useSystem();
 
   const handleChange = (event: SelectChangeEvent) => {
-    setAge(event.target.value as string);
+    setTempo(event.target.value as string);
   };
 
   return (
@@ -26,11 +26,12 @@ export default function Select(props: SelectProps) {
           label="Tempo"
           onChange={handleChange}
           disabled={props.disable}
-          defaultValue="10"
+          defaultValue="3"
         >
-          <MenuItem value={10}>1min</MenuItem>
-          <MenuItem value={20}>2min</MenuItem>
-          <MenuItem value={30}>3min</MenuItem>
+          <MenuItem value={3}>3min</MenuItem>
+          <MenuItem value={5}>5min</MenuItem>
+          <MenuItem value={10}>10min</MenuItem>
+          <MenuItem value={15}>15min</MenuItem>
         </SelectMUI>
       </FormControl>
     </Box>
